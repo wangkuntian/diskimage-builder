@@ -150,7 +150,15 @@ function extract_image() {
                 MOUNTOPTS=""
             fi
 
-            sudo mount $MOUNTOPTS $ROOT_LOOPDEV $WORKING/mnt
+#            if [[ ! -z "$DIB_IMAGE_USE_LVM" ]]; then
+#              sudo vgscan
+#              sudo vgchange -a y
+#              sudo mount /dev/mapper/uos-root $WORKING/mnt
+#              EACTION="sudo umount -f $WORKING/mnt ; sudo vgchange -a n ; $EACTION"
+#            else
+#              sudo mount $MOUNTOPTS $ROOT_LOOPDEV $WORKING/mnt
+#            fi
+
             EACTION="sudo umount -f $WORKING/mnt ; $EACTION"
             trap "$EACTION" EXIT
 

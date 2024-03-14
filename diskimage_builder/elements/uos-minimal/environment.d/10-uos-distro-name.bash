@@ -1,0 +1,4 @@
+export DIB_RELEASE=${DIB_RELEASE-1060a}
+export DISTRO_NAME=uos
+export EFI_BOOT_DIR="EFI/uos"
+export DIB_IMAGE_USE_LVM=${DIB_IMAGE_USE_LVM:-"yes"}

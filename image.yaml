@@ -1,0 +1,10 @@
+- imagename: "uos-server-amd64-1060a"
+  arch: "amd64"
+  types: [ "qcow2" ]
+  environment:
+    DIB_CLOUD_INIT_ALLOW_SSH_PWAUTH: "true"
+    DIB_CLOUD_INIT_ALLOW_ROOT_LOGIN: "true"
+    DIB_RELEASE: "1060a"
+  checksum: true
+  elements: [ "vm", "uos-minimal", "package-installs" ]
+

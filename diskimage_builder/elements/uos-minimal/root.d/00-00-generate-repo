@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ ${DIB_DEBUG_TRACE:-1} -gt 0 ]; then
+    set -x
+fi
+set -eu
+set -o pipefail
+
+
+mkdir -p ${TMP_HOOKS_PATH}/yum.repos.d/
+"${TMP_HOOKS_PATH}"/bin/uos-repo-generator -a $ARCH -p ${TMP_HOOKS_PATH}/yum.repos.d/ -r $DIB_RELEASE

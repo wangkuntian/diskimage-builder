@@ -8,6 +8,17 @@
       "9-stream": {
         "lsb_release": "ed hostname patch postfix tar time"
       }
+    },
+    "uos": {
+        "1060a": {
+            "lsb_release": "uos-lsb",
+            "redhat-rpm-config": "uos-rpm-config"
+        },
+        "1060e": {
+            "lsb_release": "",
+            "redhat-rpm-config": ""
+        }
+
     }
   },
   "distro": {

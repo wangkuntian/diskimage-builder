@@ -1,0 +1,59 @@
+[UnionTechOS-$releasever-AppStream]
+name = UnionTechOS $releasever AppStream
+baseurl = https://cdimage.uniontech.com/server-dev/1060/a/release/compose//AppStream/$basearch/os
+enabled = 1
+username=$auth_u
+password=$auth_p
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-uos-release
+gpgcheck = 1
+skip_if_unavailable = 1
+
+[UnionTechOS-$releasever-BaseOS]
+name = UnionTechOS $releasever BaseOS
+baseurl = https://cdimage.uniontech.com/server-dev/1060/a/release/compose//BaseOS/$basearch/os
+enabled = 1
+username=$auth_u
+password=$auth_p
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-uos-release
+gpgcheck = 1
+skip_if_unavailable = 1
+
+[UnionTechOS-$releasever-PowerTools]
+name = UnionTechOS $releasever PowerTools
+baseurl = https://cdimage.uniontech.com/server-dev/1060/a/release/compose//PowerTools/$basearch/os
+enabled = 1
+username=$auth_u
+password=$auth_p
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-uos-release
+gpgcheck = 1
+skip_if_unavailable = 1
+
+[UnionTechOS-$releasever-Plus]
+name = UnionTechOS $releasever Plus
+baseurl = https://cdimage.uniontech.com/server-dev/1060/a/release/compose//Plus/$basearch/os
+enabled = 1
+username=$auth_u
+password=$auth_p
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-uos-release
+gpgcheck = 1
+skip_if_unavailable = 1
+
+[UnionTechOS-$releasever-Kernel510]
+name = UnionTechOS $releasever Kernel510
+baseurl = https://cdimage.uniontech.com/server-dev/1060/a/release/compose//Kernel-510/$basearch/os
+enabled = 0
+username=$auth_u
+password=$auth_p
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-uos-release
+gpgcheck = 1
+skip_if_unavailable = 1
+
+[UnionTechOS-$releasever-Extras]
+name = UnionTechOS $releasever Extras
+baseurl = https://cdimage.uniontech.com/server-dev/1060/a/release/compose//Extras/$basearch/os
+enabled = 1
+username=$auth_u
+password=$auth_p
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-uos-release
+gpgcheck = 1
+skip_if_unavailable = 1

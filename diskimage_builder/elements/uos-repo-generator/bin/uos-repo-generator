@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+__project__ =  'diskimage-builder'
+__file__    =  'uos-repo-generator.py'
+__author__  =  'king'
+__time__    =  '2024/1/3 上午10:46'
+
+
+                              _ooOoo_
+                             o8888888o
+                             88" . "88
+                             (| -_- |)
+                             O\  =  /O
+                          ____/`---'\____
+                        .'  \\|     |//  `.
+                       /  \\|||  :  |||//  \
+                      /  _||||| -:- |||||-  \
+                      |   | \\\  -  /// |   |
+                      | \_|  ''\---/''  |   |
+                      \  .-\__  `-`  ___/-. /
+                    ___`. .'  /--.--\  `. . __
+                 ."" '<  `.___\_<|>_/___.'  >'"".
+                | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+                \  \ `-.   \_ __\ /__ _/   .-` /  /
+           ======`-.____`-.___\_____/___.-`____.-'======
+                              `=---='
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                       佛祖保佑        永无BUG
+"""
+
+import argparse
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Generate UOS repositories")
+    parser.add_argument('-a', '--arch', default='amd64',
+                        choices=['amd64', 'arm64', 'x86_64', 'aarch64'],
+                        help='The architecture of the UOS repo')
+    parser.add_argument('-r', '--release', default='1060a',
+                        choices=['1060a', '1060e', '1050a', '1050e', '1070a',
+                                 '1070e'],
+                        help='The release of the UOS repo')
+    parser.add_argument('-p', '--path', default='./',
+                        help='The path of the UOS repo file')
+    args = parser.parse_args()
+    arch = args.arch
+    if arch == 'x86_64':
+        arch = 'amd64'
+    if arch == 'aarch64':
+        arch = 'arm64'
+    base_url = 'https://cdimage.uniontech.com/server-dev'
+    version = args.release[:-1]
+    mini_version = args.release[-1:]
+    base_repos = ['AppStream', 'BaseOS']
+    if args.release == '1060a':
+        base_url = (f'{base_url}/{version}/{mini_version}/release/'
+                    f'compose/%(repo)s/$basearch/os')
+    if args.release == '1060e':
+        base_url = f'{base_url}/1060u1/e/release/{arch}/%(repo)s'
+        base_repos = ['everything']
+
+    with open(f'{args.path}/a_uos.repo', 'w+') as f:
+        for repo in base_repos:
+            url = base_url % {'repo': repo}
+            f.writelines([
+                f'[UnionTechOS-{repo}] \n',
+                f'name = UnionTechOS {repo} \n',
+                f'baseurl = {url} \n',
+                'enabled = 1 \n',
+                'gpgcheck = 0 \n',
+                'priority = 1 \n',
+                'module_hotfixes=true \n'
+                '\n'
+            ])
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,8 @@
+{
+ "default": {
+   "wget": "wget",
+   "git": "git",
+   "vim": "vim",
+   "qemu-guest-agent": "qemu-guest-agent"
+ }
+}

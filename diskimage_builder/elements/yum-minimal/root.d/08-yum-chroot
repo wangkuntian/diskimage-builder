@@ -98,6 +98,8 @@ function _install_repos {
     elif [[ ${DISTRO_NAME} == 'openeuler' ]]; then
         packages+="openEuler-release "
         packages+="openEuler-repos openEuler-gpg-keys "
+    elif [[ ${DISTRO_NAME} == 'uos' ]]; then
+        packages+="UnionTech-release "
     else
         # NOTE(ianw) 2022-04-20 : can probably remove when we don't
         # support centos 7, unlikely anything else ends up here at
@@ -285,6 +287,11 @@ sudo $_RPM --root $TARGET_ROOT --initdb
 sudo mkdir $TARGET_ROOT/etc
 sudo cp /etc/resolv.conf $TARGET_ROOT/etc/resolv.conf
 
+sudo mkdir $TARGET_ROOT/etc/yum.repos.d/
+"${TMP_HOOKS_PATH}"/bin/uos-repo-generator \
+-a $ARCH -p $TARGET_ROOT/etc/yum.repos.d/ -r $DIB_RELEASE
+cat $TARGET_ROOT/etc/yum.repos.d/*.repo
+
 # Bind mount the external yum cache inside the chroot.  Same logic
 # as in the yum element to provide for yum caching copied here
 # because the sequencing is wrong otherwise
@@ -312,6 +319,8 @@ if [[ ${DISTRO_NAME} =~ (fedora|openeuler) ]]; then
     _install_pkg_manager dnf dnf-plugins-core curl
 elif [[ ${DISTRO_NAME} == centos && $DIB_RELEASE > "7" ]]; then
     _install_pkg_manager dnf dnf-plugins-core curl libcurl
+elif [[ ${DISTRO_NAME} =~ (uos) ]]; then
+    _install_pkg_manager yum dnf dnf-plugins-core curl libcurl
 else
     _install_pkg_manager yum
 fi
